@@ -1,0 +1,5 @@
+.env
+joomla_data/
+mysql_data/
+screenshots/
+*.log

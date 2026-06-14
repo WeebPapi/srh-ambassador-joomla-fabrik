@@ -1,0 +1,42 @@
+services:
+  joomla:
+    image: joomla:5.4.5-php8.3-apache
+    restart: unless-stopped
+    ports:
+      - "${JOOMLA_PORT:-8081}:80"
+    environment:
+      JOOMLA_DB_HOST: db
+      JOOMLA_DB_USER: ${MYSQL_USER:-joomla}
+      JOOMLA_DB_PASSWORD: ${MYSQL_PASSWORD:-joomla}
+      JOOMLA_DB_NAME: ${MYSQL_DATABASE:-joomla}
+    volumes:
+      - joomla_data:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MARIADB_DATABASE: ${MYSQL_DATABASE:-joomla}
+      MARIADB_USER: ${MYSQL_USER:-joomla}
+      MARIADB_PASSWORD: ${MYSQL_PASSWORD:-joomla}
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    restart: unless-stopped
+    ports:
+      - "8082:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: ${MYSQL_USER:-joomla}
+      PMA_PASSWORD: ${MYSQL_PASSWORD:-joomla}
+    depends_on:
+      - db
+
+volumes:
+  joomla_data:
+  mysql_data:
