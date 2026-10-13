@@ -10,6 +10,8 @@ Traditional CMS implementation for the SRH Ambassador digital service platform u
 - Role and permission concept for Admin, Coordinator/Staff, Ambassador, and Public users
 - Frontend page map for the public Joomla demo
 - Static public demo prototype in `public-demo/` for quick review before the Joomla/Fabrik build is clicked together
+- Dynamic Joomla-hosted PHP/MariaDB demo in `dynamic-demo/`, mounted at `/srh-demo/`, that reads and writes the same `srh_*` tables used by the Fabrik build plan
+- English/German language switch for the dynamic demo
 - Reflection and comparison notes for the course deliverables
 
 ## Run Locally
@@ -31,12 +33,35 @@ docker compose up -d
 6. Create Fabrik lists/forms using `fabrik/build-plan.md`.
 7. Import the optional sample schema/data from `database/srh_ambassador_sample.sql` into MariaDB or recreate the fields through Fabrik.
 
+## Dynamic Demo
+
+After `docker compose up -d`, open:
+
+```text
+http://localhost:8081/srh-demo/
+```
+
+The page auto-creates and seeds the club, poll, and event tables if they do not exist yet. It demonstrates the same three connected data types as the Strapi version:
+
+- Club Poll
+- Club
+- Event
+
+Use the language selector to switch between English and German:
+
+```text
+http://localhost:8081/srh-demo/?lang=en
+http://localhost:8081/srh-demo/?lang=de
+```
+
 ## Demo Pages To Create In Joomla
 
 - Ambassador directory
 - Ambassador detail page
 - Program overview
 - Event list
+- Club list and club poll list
+- Ambassador dashboard for creating polls, clubs, and club events
 - FAQ page
 - Inquiry/contact form
 
@@ -46,4 +71,4 @@ The public page structure and sample copy are documented in `docs/frontend-pages
 
 - Fabrik installation is a manual administrator step because Joomla extensions are normally installed through the Joomla backend.
 - Ambassador self-editing is documented as an intended permission setup. It can be enabled with Fabrik ACL row filters after user accounts are mapped to ambassador records.
-- The static `public-demo/` is not a replacement for Joomla. It is included only as a lightweight preview of the public-facing content.
+- The dynamic `srh-demo` page is a compact PHP/MariaDB demonstration of the Fabrik data model. In a full Joomla build, these same reads and writes would be configured through Fabrik lists and forms.

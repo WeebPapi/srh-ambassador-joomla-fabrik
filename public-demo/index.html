@@ -12,7 +12,9 @@
       <nav>
         <a href="#ambassadors">Ambassadors</a>
         <a href="#programs">Programs</a>
+        <a href="#clubs">Clubs</a>
         <a href="#events">Events</a>
+        <a href="#ambassador-dashboard">Ambassador Dashboard</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -22,14 +24,16 @@
         <h2>Meet students who know SRH Berlin from the inside</h2>
         <p>Browse ambassadors, find programs, join events, and send a question in your preferred language.</p>
       </section>
+
       <section id="ambassadors">
         <h2>Ambassadors</h2>
         <div class="grid">
-          <article><h3>Maya Singh</h3><p>International Business Administration · India · English, Hindi</p></article>
-          <article><h3>Luka Beridze</h3><p>Computer Science · Georgia · English</p></article>
-          <article><h3>Anna Keller</h3><p>Hospitality Management · Germany · German, English</p></article>
+          <article><h3>Maya Singh</h3><p>International Business Administration - India - English, Hindi</p></article>
+          <article><h3>Luka Beridze</h3><p>Computer Science - Georgia - English</p></article>
+          <article><h3>Anna Keller</h3><p>Hospitality Management - Germany - German, English</p></article>
         </div>
       </section>
+
       <section id="programs">
         <h2>Programs</h2>
         <ul>
@@ -38,19 +42,107 @@
           <li>Hospitality Management, Bachelor</li>
         </ul>
       </section>
+
+      <section id="clubs">
+        <h2>Student Clubs</h2>
+        <div class="grid">
+          <article>
+            <h3>Data & AI Club</h3>
+            <p>Technology - <span data-count="club-data">38</span> members</p>
+            <p>Projects, talks, and study circles around data science and applied AI.</p>
+            <button type="button" data-action="increment" data-target="club-data">Join club</button>
+          </article>
+          <article>
+            <h3>Founders Club</h3>
+            <p>Entrepreneurship - <span data-count="club-founders">24</span> members</p>
+            <p>Test ideas, meet co-founders, and prepare pitch nights.</p>
+            <button type="button" data-action="increment" data-target="club-founders">Join club</button>
+          </article>
+          <article>
+            <h3>Hospitality Culture Club</h3>
+            <p>Campus Life - <span data-count="club-hospitality">19</span> members</p>
+            <p>Pop-up tastings, venue visits, and service design conversations.</p>
+            <button type="button" data-action="increment" data-target="club-hospitality">Join club</button>
+          </article>
+        </div>
+
+        <h3>Club Interest Polls</h3>
+        <div class="list">
+          <article>
+            <h3>Should SRH start a Film Club?</h3>
+            <p>Weekly screenings and student discussion nights.</p>
+            <p><span data-count="poll-film">31</span> interested / 25 needed - popular</p>
+            <button type="button" data-action="increment" data-target="poll-film">I'm interested</button>
+          </article>
+          <article>
+            <h3>Interest check: Robotics Club</h3>
+            <p>Build small robots and prepare showcase demos.</p>
+            <p><span data-count="poll-robotics">18</span> interested / 25 needed - open</p>
+            <button type="button" data-action="increment" data-target="poll-robotics">I'm interested</button>
+          </article>
+        </div>
+      </section>
+
       <section id="events">
         <h2>Events</h2>
-        <ul>
-          <li>Online Ambassador Q&A · 8 July 2026</li>
-          <li>Berlin Campus Tour · 15 July 2026</li>
-          <li>International Student Welcome Talk · 3 August 2026</li>
-        </ul>
+        <div class="list">
+          <article>
+            <h3>Online Ambassador Q&A</h3>
+            <p>8 July 2026 - Online Q&A - <span data-count="event-qa">34</span> interested</p>
+            <button type="button" data-action="increment" data-target="event-qa">Interested</button>
+          </article>
+          <article>
+            <h3>Berlin Campus Tour</h3>
+            <p>15 July 2026 - Campus - <span data-count="event-tour">51</span> interested</p>
+            <button type="button" data-action="increment" data-target="event-tour">Interested</button>
+          </article>
+          <article>
+            <h3>International Student Welcome Talk</h3>
+            <p>3 August 2026 - Welcome - <span data-count="event-welcome">27</span> interested</p>
+            <button type="button" data-action="increment" data-target="event-welcome">Interested</button>
+          </article>
+          <article>
+            <h3>Data Club Project Night</h3>
+            <p>14 August 2026 - Data & AI Club - <span data-count="event-data">42</span> interested</p>
+            <button type="button" data-action="increment" data-target="event-data">Interested</button>
+          </article>
+        </div>
       </section>
+
+      <section id="ambassador-dashboard">
+        <h2>Ambassador Dashboard</h2>
+        <div class="dashboard-grid">
+          <form data-demo-form="poll">
+            <h3>Create interest poll</h3>
+            <label>Club idea <input type="text" name="club_idea"></label>
+            <label>Description <textarea name="poll_description"></textarea></label>
+            <label>Popularity threshold <input type="number" name="threshold" value="20"></label>
+            <button type="submit">Create poll</button>
+          </form>
+          <form data-demo-form="club">
+            <h3>Create club</h3>
+            <label>Name <input type="text" name="club_name"></label>
+            <label>Category <input type="text" name="category"></label>
+            <label>Description <textarea name="club_description"></textarea></label>
+            <button type="submit">Create club</button>
+          </form>
+          <form data-demo-form="event">
+            <h3>Create club event</h3>
+            <label>Title <input type="text" name="event_title"></label>
+            <label>Club <input type="text" name="club"></label>
+            <label>Date <input type="datetime-local" name="starts_at"></label>
+            <button type="submit">Create event</button>
+          </form>
+        </div>
+        <p class="status" id="dashboard-status">Demo actions appear here. In Fabrik these forms map to srh_club_polls, srh_clubs, and srh_events.</p>
+      </section>
+
       <section id="faq">
         <h2>FAQ</h2>
         <details open><summary>How do I contact an ambassador?</summary><p>Submit the inquiry form and choose a program and preferred language.</p></details>
         <details><summary>Are campus tours available?</summary><p>Yes, upcoming tours are shown on the events page.</p></details>
       </section>
+
       <section id="contact">
         <h2>Inquiry Form</h2>
         <form>
@@ -61,5 +153,33 @@
         </form>
       </section>
     </main>
+
+    <script>
+      const usedActions = new Set();
+
+      document.querySelectorAll('[data-action="increment"]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const target = button.dataset.target;
+          const count = document.querySelector(`[data-count="${target}"]`);
+
+          if (!count || usedActions.has(target)) return;
+
+          count.textContent = String(Number(count.textContent) + 1);
+          usedActions.add(target);
+          button.textContent = button.textContent.includes('Join') ? 'Joined' : 'Marked';
+          button.disabled = true;
+        });
+      });
+
+      document.querySelectorAll('[data-demo-form]').forEach((form) => {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const status = document.getElementById('dashboard-status');
+          const type = form.dataset.demoForm;
+          status.textContent = `Created ${type} demo record. In Joomla/Fabrik this would be saved through the connected Fabrik form.`;
+          form.reset();
+        });
+      });
+    </script>
   </body>
 </html>

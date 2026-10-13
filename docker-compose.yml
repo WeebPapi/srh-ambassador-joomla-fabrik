@@ -11,6 +11,7 @@ services:
       JOOMLA_DB_NAME: ${MYSQL_DATABASE:-joomla}
     volumes:
       - joomla_data:/var/www/html
+      - ./dynamic-demo:/var/www/html/srh-demo
     depends_on:
       - db
 

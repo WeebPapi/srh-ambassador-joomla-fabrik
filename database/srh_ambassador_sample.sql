@@ -52,13 +52,47 @@ CREATE TABLE IF NOT EXISTS srh_events (
   starts_at DATETIME NOT NULL,
   location_or_link VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
-  event_type VARCHAR(120) NOT NULL
+  event_type VARCHAR(120) NOT NULL,
+  club_id INT NULL,
+  interested_count INT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS srh_event_ambassadors (
   event_id INT NOT NULL,
   ambassador_id INT NOT NULL,
   PRIMARY KEY (event_id, ambassador_id)
+);
+
+CREATE TABLE IF NOT EXISTS srh_club_polls (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  club_idea VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  interest_count INT NOT NULL DEFAULT 0,
+  popularity_threshold INT NOT NULL DEFAULT 20,
+  status ENUM('open','popular','converted','closed') NOT NULL DEFAULT 'open',
+  created_by_ambassador_id INT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS srh_clubs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  category VARCHAR(150) NOT NULL,
+  status ENUM('proposed','active','paused') NOT NULL DEFAULT 'active',
+  member_count INT NOT NULL DEFAULT 0,
+  created_from_poll_id INT NULL,
+  created_by_ambassador_id INT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS srh_club_members (
+  club_id INT NOT NULL,
+  user_id INT NOT NULL,
+  role ENUM('member','lead') NOT NULL DEFAULT 'member',
+  joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (club_id, user_id)
 );
 
 CREATE TABLE IF NOT EXISTS srh_student_inquiries (
@@ -120,10 +154,23 @@ INSERT INTO srh_ambassador_countries VALUES
 INSERT INTO srh_ambassador_languages VALUES
   (1,1), (1,3), (2,1), (3,1), (3,2), (4,1), (4,3), (5,1);
 
-INSERT INTO srh_events (id, title, starts_at, location_or_link, description, event_type) VALUES
-  (1, 'Online Ambassador Q&A', '2026-07-08 16:00:00', 'https://meet.example/srh-qa', 'Open question session with current SRH students.', 'Online Q&A'),
-  (2, 'Berlin Campus Tour', '2026-07-15 11:00:00', 'SRH Berlin Campus', 'Guided tour for prospective students and families.', 'Campus'),
-  (3, 'International Student Welcome Talk', '2026-08-03 14:00:00', 'Auditorium A', 'Ambassadors explain first-week essentials.', 'Welcome');
+INSERT INTO srh_club_polls (id, title, club_idea, description, interest_count, popularity_threshold, status, created_by_ambassador_id) VALUES
+  (1, 'Should SRH start a Film Club?', 'Film Club', 'Weekly screenings and student discussion nights.', 31, 25, 'popular', 1),
+  (2, 'Interest check: Robotics Club', 'Robotics Club', 'Build small robots and prepare showcase demos.', 18, 25, 'open', 2);
+
+INSERT INTO srh_clubs (id, name, description, category, status, member_count, created_from_poll_id, created_by_ambassador_id) VALUES
+  (1, 'Data & AI Club', 'Student-led projects, talks, and study circles around data science and applied AI.', 'Technology', 'active', 38, NULL, 2),
+  (2, 'Founders Club', 'A place to test ideas, meet co-founders, and prepare pitch nights.', 'Entrepreneurship', 'active', 24, NULL, 1),
+  (3, 'Hospitality Culture Club', 'Pop-up tastings, venue visits, and service design conversations.', 'Campus Life', 'active', 19, NULL, 3);
+
+INSERT INTO srh_club_members (club_id, user_id, role) VALUES
+  (1,1,'lead'), (1,2,'member'), (2,3,'lead'), (3,4,'member');
+
+INSERT INTO srh_events (id, title, starts_at, location_or_link, description, event_type, club_id, interested_count) VALUES
+  (1, 'Online Ambassador Q&A', '2026-07-08 16:00:00', 'https://meet.example/srh-qa', 'Open question session with current SRH students.', 'Online Q&A', NULL, 34),
+  (2, 'Berlin Campus Tour', '2026-07-15 11:00:00', 'SRH Berlin Campus', 'Guided tour for prospective students and families.', 'Campus', NULL, 51),
+  (3, 'International Student Welcome Talk', '2026-08-03 14:00:00', 'Auditorium A', 'Ambassadors explain first-week essentials.', 'Welcome', NULL, 27),
+  (4, 'Data Club Project Night', '2026-08-14 17:00:00', 'Lab 2.04', 'Bring a dataset and build a tiny dashboard with other students.', 'Club Meetup', 1, 42);
 
 INSERT INTO srh_event_ambassadors VALUES
   (1,1), (1,2), (2,3), (2,5), (3,1), (3,4);

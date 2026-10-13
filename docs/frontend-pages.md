@@ -7,6 +7,7 @@
 - Events: Fabrik event list ordered by date.
 - FAQ: Fabrik FAQ list grouped by FAQ category.
 - Contact: Fabrik student inquiry form.
+- Language switch: English/German.
 
 ## Page Notes
 
@@ -24,7 +25,19 @@ Display program name, degree level, department, description, and related ambassa
 
 ### Events
 
-Display title, date/time, event type, location/online link, description, and assigned ambassadors.
+Display title, date/time, event type, location/online link, description, assigned ambassadors, optional club, and interested count. Logged-in students can mark themselves as interested.
+
+### Clubs
+
+Display club name, category, description, member count, related club polls, and related club events. Logged-in students can join a club or mark interest in a proposed club poll.
+
+### Ambassador Dashboard
+
+Expose Fabrik forms for ambassadors to create club polls, clubs, and club events. These map to `srh_club_polls`, `srh_clubs`, and `srh_events`.
+
+### Multilingual Demo
+
+The dynamic PHP demo under `/srh-demo/` supports English and German through the `lang` query parameter. In a full Joomla/Fabrik implementation, the same structure should be represented through Joomla language associations and translated menu/module strings.
 
 ### FAQ
 

@@ -61,6 +61,11 @@ section {
   gap: 16px;
 }
 
+.list {
+  display: grid;
+  gap: 14px;
+}
+
 article,
 details,
 form {
@@ -68,6 +73,12 @@ form {
   border: 1px solid #dde2e8;
   border-radius: 8px;
   padding: 18px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
 }
 
 label {
@@ -95,6 +106,17 @@ button {
   padding: 10px 14px;
   background: #005ea8;
   color: #ffffff;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #70808f;
+  cursor: default;
+}
+
+.status {
+  margin-top: 16px;
+  color: #4d5b68;
 }
 
 @media (max-width: 720px) {

@@ -9,6 +9,9 @@ Create the following Fabrik lists, each backed by the matching database table fr
 - Countries/Regions: `srh_countries`
 - Languages: `srh_languages`
 - Events: `srh_events`
+- Clubs: `srh_clubs`
+- Club Polls: `srh_club_polls`
+- Club Members: `srh_club_members`
 - Student Inquiries: `srh_student_inquiries`
 - FAQs: `srh_faqs`
 - FAQ Categories: `srh_faq_categories`
@@ -19,6 +22,7 @@ Create the following Fabrik lists, each backed by the matching database table fr
 - Ambassador Countries: `srh_ambassador_countries`
 - Ambassador Languages: `srh_ambassador_languages`
 - Event Ambassadors: `srh_event_ambassadors`
+- Club Members: `srh_club_members`
 
 ## Field Types
 
@@ -35,6 +39,8 @@ Create Joomla menu items that point to Fabrik list or form views:
 - Ambassadors -> Fabrik list `Ambassadors`
 - Programs -> Fabrik list `Programs`
 - Events -> Fabrik list `Events`
+- Clubs -> Fabrik list `Clubs`
+- Ambassador Dashboard -> Fabrik forms `Club Polls`, `Clubs`, and `Events`
 - FAQ -> Fabrik list `FAQs`
 - Contact -> Fabrik form `Student Inquiries`
 
@@ -43,4 +49,6 @@ Create Joomla menu items that point to Fabrik list or form views:
 - Public ambassador list: `status = active`.
 - Public FAQ list: `published = 1`.
 - Event list: sort by `starts_at`.
+- Club list: filter `status = active`.
+- Club poll list: sort open/popular polls first.
 - Inquiry admin list: sort by newest first and filter by status.
